@@ -239,9 +239,6 @@ fabric.properties
 
 .idea/
 *.json
-example_json/
-tools/S/
-tools/equip_512/
 env/
 *.un~
 *.csv
@@ -249,8 +246,3 @@ env/
 *.png
 *.csv~
 *.py~
-test.py
-init.zip
-todo.txt
-dev.log
-test.txt
