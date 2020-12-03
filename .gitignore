@@ -248,3 +248,5 @@ env/
 *.py~
 tools/.token
 py_venv/
+*/.token
+.gitignore~
