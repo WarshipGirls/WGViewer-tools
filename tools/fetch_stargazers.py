@@ -4,17 +4,23 @@ __license__ = "GPLv3"
 import csv
 import datetime
 import requests
-import argparse
 
-parser = argparse.ArgumentParser()
-parser.add_argument('-t','--token',required=True,help="The GitHub Token.")
-parser.add_argument('-r','--repo',required=True,help="The GitHub Repo,in the form like 'user/repo'.")
-args = parser.parse_args()
+# import argparse
+# parser = argparse.ArgumentParser()
+# parser.add_argument('-t','--token',required=True,help="The GitHub Token.")
+# parser.add_argument('-r','--repo',required=True,help="The GitHub Repo,in the form like 'user/repo'.")
+# args = parser.parse_args()
 
-owner = args.repo.split('/')[0]
-repo = args.repo.split('/')[1]
+# owner = args.repo.split('/')[0]
+# repo = args.repo.split('/')[1]
 
-headers = {"Authorization": "token "+args.token}
+# TODO all repo in the organizations
+owner = 'WarshipGirls'
+repo = 'WGViewer'
+with open('.token', 'r') as f:
+  _token = f.read()
+
+headers = {"Authorization": "token " + _token}
 
 fields = ["username","name","blog", "company", "bio","avatar_url","hireable" , "num_followers", "num_following","created_at","star_time"]
 
@@ -64,6 +70,7 @@ star_list = []
 hasNextPage = True
 endCursor = "" # Start from begining
 count = 0
+stargazers_list = []
 with open('stargazers.csv', 'w') as stars:
     stars_writer = csv.writer(stars)
     stars_writer.writerow(fields)
@@ -97,7 +104,11 @@ with open('stargazers.csv', 'w') as stars:
             star_time = star_time + datetime.timedelta(hours=-5) # EST
             star_time = star_time.strftime('%Y-%m-%d %H:%M:%S')
             star_list.append((username,star_time))
+            stargazers_list.append(username)
             stars_writer.writerow([username,name,blog,company,bio,avatar_url,hireable,num_followers,num_following,created_at,star_time])
 
         count = count + 100
         print(str(count) + " users processed.")
+
+def get_stargazers() -> list:
+    return stargazers_list

@@ -246,3 +246,4 @@ env/
 *.png
 *.csv~
 *.py~
+tools/.token
