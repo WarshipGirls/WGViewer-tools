@@ -247,3 +247,4 @@ env/
 *.csv~
 *.py~
 tools/.token
+py_venv/
