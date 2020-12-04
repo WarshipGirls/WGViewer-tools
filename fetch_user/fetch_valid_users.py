@@ -1,5 +1,5 @@
-from fetch_contributors import get_contributors, get_commenters
-from fetch_stargazers import get_stargazers
+from .fetch_contributors import get_contributors, get_commenters
+from .fetch_stargazers import get_stargazers
 
 def set_valid_user_list() -> None:
     # This proves who logged in
@@ -54,3 +54,4 @@ def get_access_level(user: str) -> int:
 
     if (user in stargazers) and (user in contributors):
         return 1
+
